@@ -9,6 +9,17 @@ int main(void)
 	map1->InitMap();
 	p1->InitPlayer(map1->map);
 	map1->UpdateMap();
-
-
+	while (1)
+	{
+		if (_getch() == 75)
+		{
+			p1->LeftMovePlayer(map1->map);
+			map1->UpdateMap();
+		}
+		//if (_getch() == 77)
+		//{
+		//	p1->RightMovePlayer(map1->map);
+		//	map1->UpdateMap();
+		//}
+	}
 }

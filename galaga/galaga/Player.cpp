@@ -2,7 +2,7 @@
 
 void Player::InitPlayer(int map[40][20])
 {
-	for (int i = 3; i >= 0; i--)
+	for (int i = 2; i >= 0; i--)
 	{
 		for (int k = 0; k < 3; k++)
 		{
@@ -13,7 +13,7 @@ void Player::InitPlayer(int map[40][20])
 
 void Player::LeftMovePlayer(int map[40][20])
 {
-	if (center > 0)
+	if (center >= 2)
 	{
 		deleteMovePlayer(map);
 		center--;
@@ -23,7 +23,7 @@ void Player::LeftMovePlayer(int map[40][20])
 
 void Player::RightMovePlayer(int map[40][20])
 {
-	if (center < 19)
+	if (center < 16)
 	{
 		deleteMovePlayer(map);
 		center++;
@@ -39,7 +39,7 @@ void Player::deleteMovePlayer(int map[40][20])
 	{
 		for (int k = 0; k < 3; k++)
 		{
-			map[Y + i][center + i] = 0;
+			map[Y + i][center + k] = 0;
 		}
 	}
 }
