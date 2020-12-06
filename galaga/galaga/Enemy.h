@@ -4,7 +4,7 @@
 class Enemy
 {
 private:
-	struct EnemyMeber
+	struct EnemyMember
 	{
 		int member[3][3] =
 		{
@@ -14,7 +14,7 @@ private:
 		};
 		int hp = 3;
 	};
-
+	int level = 1;
 
 public:
 	void InitEnemy();

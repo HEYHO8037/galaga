@@ -11,10 +11,12 @@ private:
 		{1,1,1}
 	};
 
+	int center = 10;
+	int X = 3;
+	int key = getch();
+
 public:
-	void InitPlayer();
-	void MovePlayer();
-	void deleteMovePlayer();
-	void PlayerShot();
-	void BulletCheck();
+	void InitPlayer(int map[40][20]);
+	void MovePlayer(int map[40][20]);
+	void deleteMovePlayer(int map[40][20]);
 };
