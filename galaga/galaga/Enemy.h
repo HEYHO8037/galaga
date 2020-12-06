@@ -13,14 +13,16 @@ private:
 			{0,0,0}
 		};
 		int hp = 3;
+		int x = 0;
+		int y = 0;
 	};
-	int level = 1;
+	int mapY = 36;
+	int mapX = 2;
+	int enemycount = 0;
+	int random = rand() % 2;
 
 public:
-	void InitEnemy();
-	void MoveEnemy();
-	void MoveDeleteEnemy();
-	void EnemyShot();
-	void BulletCheck();
-
+	void InitEnemy(EnemyMember* name, int map[40][20]);
+	void MoveEnemy(EnemyMember* name, int map[40][20]);
+	void MoveDeleteEnemy(EnemyMember* name, int map[40][20]);
 };

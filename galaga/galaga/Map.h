@@ -3,7 +3,7 @@
 using namespace std;
 class Map 
 {
-private:
+public:
 	int map[40][20];
 public:
 	void InitMap();

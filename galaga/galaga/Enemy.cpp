@@ -1,30 +1,70 @@
 #include "Enemy.h"
 
-void Enemy::InitEnemy()
+void Enemy::InitEnemy(EnemyMember* name, int map[40][20])
 {
-	if (level == 1)
+	name = new EnemyMember;
+	for (int i = 0; i < 3; i++)
 	{
-		EnemyMember e1;
-		EnemyMember e2;
-		EnemyMember e3;
+		name->x = mapX;
+		name->y = mapY;
+		for (int k = 0; k < 3; k++)
+		{
+			map[mapY-i][mapX] += name->member[i][k];
+		}
+	}
+	mapX += 4;
+	enemycount++;
 
-	}
-	else if (level == 2)
+	if (enemycount % 3 == 0)
 	{
-		EnemyMember e1;
-		EnemyMember e2;
-		EnemyMember e3;
-		EnemyMember e4;
-		EnemyMember e5;
+		mapY -= 3;
 	}
-	else
+	
+}
+
+void Enemy::MoveDeleteEnemy(EnemyMember* name, int map[40][20])
+{
+	name->x = mapX;
+	name->y = mapY;
+	
+	for (int i = 0; i < 3; i++)
 	{
-		EnemyMember e1;
-		EnemyMember e2;
-		EnemyMember e3;
-		EnemyMember e4;
-		EnemyMember e5;
-		EnemyMember e6;
-		EnemyMember e7;
+		for (int k = 0; k < 3; k++)
+		{
+			map[mapY - i][mapX + k] = 0;
+		}
+	}
+
+	
+}
+
+void Enemy::MoveEnemy(EnemyMember* name, int map[40][20])
+{
+
+	int movX = name->x;
+	int movY = name->y;
+
+	if (random % 2 == 0)
+	{
+		movX++;
+		for (int i = 0; i < 3; i++)
+		{
+			for (int k = 0; k < 3; k++)
+			{
+				map[movY - i][movX + k] += name->member[i][k];
+			}
+		}
+	}
+
+	else if (random % 2 == 1)
+	{
+		movX--;
+		for (int i = 0; i < 3; i++)
+		{
+			for (int k = 0; k < 3; k++)
+			{
+				map[movY - i][movX + k] += name->member[i][k];
+			}
+		}
 	}
 }
