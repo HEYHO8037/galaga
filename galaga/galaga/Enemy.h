@@ -16,13 +16,17 @@ private:
 		int x = 0;
 		int y = 0;
 	};
-	int mapY = 36;
+	int maxY = 0;
+	int maxX = 0;
+
+	int mapY = 2;
 	int mapX = 2;
+
 	int enemycount = 0;
 	int random = rand() % 2;
 
 public:
-	void InitEnemy(EnemyMember* name, int map[40][20]);
-	void MoveEnemy(EnemyMember* name, int map[40][20]);
-	void MoveDeleteEnemy(EnemyMember* name, int map[40][20]);
+	void InitEnemy(int enemynumber, int map[40][20]);
+	void MoveEnemy(int map[40][20]);
+	void MoveDeleteEnemy(int map[40][20]);
 };
