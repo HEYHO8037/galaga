@@ -13,7 +13,7 @@ void Player::InitPlayer(int map[40][20])
 
 void Player::LeftMovePlayer(int map[40][20])
 {
-	if (center >= 2)
+	if (center > 1)
 	{
 		deleteMovePlayer(map);
 		center--;

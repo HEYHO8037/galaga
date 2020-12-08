@@ -27,6 +27,7 @@ private:
 
 public:
 	void InitEnemy(int enemynumber, int map[40][20]);
-	void MoveEnemy(int map[40][20]);
+	void MoveRightEnemy(int map[40][20]);
+	void MoveLeftEnemy(int map[40][20]);
 	void MoveDeleteEnemy(int map[40][20]);
 };
