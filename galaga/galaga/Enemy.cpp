@@ -6,7 +6,7 @@ void Enemy::InitEnemy(int enemynumber, int map[40][20])
 	for (int count = 0; count < enemynumber; count++)
 	{
 		EnemyMember name;
-		if (count % 4 == 0 && count > 4)
+		if (count % 4 == 0)
 		{
 			maxY += 3;
 			maxX = mapX;
@@ -34,8 +34,9 @@ void Enemy::MoveDeleteEnemy(int map[40][20])
 {	
 	for (int count = 0; count < enemycount; count++)
 	{
-		if (count % 4 == 0 && count > 4)
+		if (count % 4 == 0 )
 		{
+			maxX = mapX;
 			maxY += 3;
 		}
 		if (count == 0)
@@ -62,6 +63,21 @@ void Enemy::MoveRightEnemy(int map[40][20])
 	{
 		MoveDeleteEnemy(map);
 		mapX++;
+		InitEnemy(enemycount, map);
+	}
+	else
+	{
+		MoveDeleteEnemy(map);
+		InitEnemy(enemycount, map);
+	}
+}
+
+void Enemy::MoveLeftEnemy(int map[40][20])
+{
+	if (maxX > 13)
+	{
+		MoveDeleteEnemy(map);
+		mapX--;
 		InitEnemy(enemycount, map);
 	}
 	else
