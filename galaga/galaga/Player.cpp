@@ -45,18 +45,3 @@ void Player::deleteMovePlayer(int map[40][20])
 }
 
 
-//void Player::ShotBullet(int map[40][20])
-//{
-//	bullet *blt = new bullet;
-//	blt->x = Y;
-//	blt->x = center + 1;
-//
-//	map[blt->y][blt->x] = 1;
-//	
-//}
-//
-//void Player::MoveBullet(int map[40][20])
-//{
-//	map
-//}
-

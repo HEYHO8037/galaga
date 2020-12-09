@@ -6,4 +6,5 @@
 
 #include "Enemy.h"
 #include "Map.h"
+#include "Bullet.h"
 #include "Player.h"
