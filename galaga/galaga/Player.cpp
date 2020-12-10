@@ -49,12 +49,6 @@ void Player::deleteMovePlayer(int map[40][20])
 	}
 }
 
-void Player::ShotPlayerBullet(int map[40][20])
-{
-	Bullet* bul = new Bullet(center+1, Y);
-	bul->ShotBullet(map);
-}
-
 void Player::ChcekPlayerBullet(int map[40][20])
 {
 	for (int i = 3; i >= 0; i--)
@@ -69,16 +63,6 @@ void Player::ChcekPlayerBullet(int map[40][20])
 	}
 
 	deleteMovePlayer(map);
-}
-
-void Player::MovePlayerBullet(int map[40][20])
-{
-	MoveBullet(0, map);
-}
-
-void Player::MoveDeleteBullet(int map[40][20])
-{
-	DeleteBullet(map);
 }
 
 

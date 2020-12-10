@@ -1,7 +1,7 @@
 #pragma once
 #include "import.h"
 
-class Player : Bullet
+class Player
 {
 private:
 	int playerMember[3][3] =
@@ -19,8 +19,5 @@ public:
 	void LeftMovePlayer(int map[40][20]);
 	void RightMovePlayer(int map[40][20]);
 	void deleteMovePlayer(int map[40][20]);
-	void ShotPlayerBullet(int map[40][20]);
 	void ChcekPlayerBullet(int map[40][20]);
-	void MovePlayerBullet(int map[40][20]);
-	void MoveDeleteBullet(int map[40][20]);
 };
