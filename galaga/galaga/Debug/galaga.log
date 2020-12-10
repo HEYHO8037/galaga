@@ -1,2 +1,7 @@
-﻿  main.cpp
+﻿  Bullet.cpp
+  Enemy.cpp
+  Map.cpp
+  Player.cpp
+  main.cpp
+  코드를 생성하고 있습니다...
   galaga.vcxproj -> C:\Users\haeho\Desktop\PERSONAL\C++\갤러그\galaga\galaga\Debug\galaga.exe

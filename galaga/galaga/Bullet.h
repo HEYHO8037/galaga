@@ -3,15 +3,13 @@
 class Bullet
 {
 private:
-	struct bullet
-	{
-		int x, y;
-	};
-	bullet bul;
+	int x;
+	int y;
 
 public:
-	void ShotBullet(int x, int y, int map[40][20]);
-	void MoveBullet(int map[40][20]);
+	Bullet();
+	Bullet(int x, int y);
+	void ShotBullet(int map[40][20]);
+	void MoveBullet(int check, int map[40][20]);
 	void DeleteBullet(int mpap[40][20]);
-	void CheckBullet(int x, int y, int map[40][20]);
 };

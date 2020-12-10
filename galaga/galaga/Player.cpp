@@ -1,5 +1,10 @@
 #include "Player.h"
 
+Player::Player()
+{
+
+}
+
 void Player::InitPlayer(int map[40][20])
 {
 	for (int i = 2; i >= 0; i--)
@@ -42,6 +47,38 @@ void Player::deleteMovePlayer(int map[40][20])
 			map[Y + i][center + k] = 0;
 		}
 	}
+}
+
+void Player::ShotPlayerBullet(int map[40][20])
+{
+	Bullet* bul = new Bullet(center+1, Y);
+	bul->ShotBullet(map);
+}
+
+void Player::ChcekPlayerBullet(int map[40][20])
+{
+	for (int i = 3; i >= 0; i--)
+	{
+		for (int k = 0; k < 3; k++)
+		{
+			if (map[Y + i][center + k] > 1)
+			{
+				break;
+			}
+		}
+	}
+
+	deleteMovePlayer(map);
+}
+
+void Player::MovePlayerBullet(int map[40][20])
+{
+	MoveBullet(0, map);
+}
+
+void Player::MoveDeleteBullet(int map[40][20])
+{
+	DeleteBullet(map);
 }
 
 
