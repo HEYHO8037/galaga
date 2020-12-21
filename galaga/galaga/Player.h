@@ -1,9 +1,9 @@
 #pragma once
-#include "import.h"
+#include "MemoryPool.h"
 
-class Player
+class Player : MemoryPool
 {
-private:
+protected:
 	int playerMember[3][3] =
 	{
 		{0,0,0},
@@ -19,5 +19,9 @@ public:
 	void LeftMovePlayer(int map[40][20]);
 	void RightMovePlayer(int map[40][20]);
 	void deleteMovePlayer(int map[40][20]);
+
 	void ChcekPlayerBullet(int map[40][20]);
+	void bulletInit(int map[40][20]);
+	void bulletMove(int map[40][20]);
+	void bulletCheck(int map[40][20]);
 };

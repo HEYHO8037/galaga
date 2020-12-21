@@ -3,86 +3,87 @@
 void Enemy::InitEnemy(int enemynumber, int map[40][20])
 {
 	enemycount = enemynumber;
-	for (int count = 0; count < enemynumber; count++)
+	for (int i = 0; i < enemycount; i++)
 	{
-		EnemyMember name;
-		if (count % 4 == 0)
+		if (i % 4 == 0 && i != 0)
 		{
-			maxY += 3;
-			maxX = mapX;
+			mapY += 3;
+			mapX = 2;
 		}
 
-		if (count == 0)
+		EnemyMember* name = new EnemyMember;
+		name->x = mapX;
+		name->y = mapY;
+		
+		if (i == 0)
 		{
-			maxX = mapX;
-			maxY = mapY;
+			name->ebMember = nullptr;
+			name->efMember = nullptr;
 		}
+		else
+		{
+			name->efMember = eSave;
+			name->efMember->ebMember = eSave;
+		}
+
 
 		for (int i = 0; i < 3; i++)
 		{
 			for (int k = 0; k < 3; k++)
 			{
-				map[maxY + i][maxX + k] += name.member[i][k];
+				map[name->y + i][name->x + k] += name->member[i][k];
 			}
 		}
-		maxX += 4;
+		mapX += 4;
+		eSave = name;
+
 	}
-	maxX -= 4;
+	mapX -= 4;
+
 }
 
 void Enemy::MoveDeleteEnemy(int map[40][20])
 {	
+	EnemyMember* mdEnemy = eSave;
 	for (int count = 0; count < enemycount; count++)
 	{
-		if (count % 4 == 0 )
-		{
-			maxX = mapX;
-			maxY += 3;
-		}
-		if (count == 0)
-		{
-			maxX = mapX;
-			maxY = mapY;
-		}
-
 		for (int i = 0; i < 3; i++)
 		{
 			for (int k = 0; k < 3; k++)
 			{
-				map[maxY + i][maxX + k] = 0;
+				map[mdEnemy->y + i][mdEnemy->x + k] = 0;
 			}
 		}
-		maxX += 4;
-	}
-	maxX -= 4;
-}
-
-void Enemy::MoveRightEnemy(int map[40][20])
-{
-	if (maxX < 16)
-	{
-		MoveDeleteEnemy(map);
-		mapX++;
-		InitEnemy(enemycount, map);
-	}
-	else
-	{
-		MoveDeleteEnemy(map);
-		InitEnemy(enemycount, map);
+		mdEnemy = mdEnemy->efMember;
 	}
 }
 
-void Enemy::MoveLeftEnemy(int map[40][20])
-{
-	if (maxX > 13)
-	{
-		MoveDeleteEnemy(map);
-		mapX--;
-		InitEnemy(enemycount, map);
-	}
-	else
-	{
-		MoveDeleteEnemy(map);
-		InitEnemy(enemycount, map);
-	}
-}
+//void Enemy::MoveRightEnemy(int map[40][20])
+//{
+//	if (maxX < 16)
+//	{
+//		MoveDeleteEnemy(map);
+//		mapX++;
+//		InitEnemy(enemycount, map);
+//	}
+//	else
+//	{
+//		MoveDeleteEnemy(map);
+//		InitEnemy(enemycount, map);
+//	}
+//}
+//
+//void Enemy::MoveLeftEnemy(int map[40][20])
+//{
+//	if (maxX > 13)
+//	{
+//		MoveDeleteEnemy(map);
+//		mapX--;
+//		InitEnemy(enemycount, map);
+//	}
+//	else
+//	{
+//		MoveDeleteEnemy(map);
+//		InitEnemy(enemycount, map);
+//	}
+//}

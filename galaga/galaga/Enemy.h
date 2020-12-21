@@ -1,9 +1,8 @@
 #pragma once
-#include "import.h"
-
+#include <random>
 class Enemy
 {
-private:
+protected:
 	struct EnemyMember
 	{
 		int member[3][3] =
@@ -15,9 +14,13 @@ private:
 		int hp = 3;
 		int x = 0;
 		int y = 0;
+		EnemyMember* ebMember = nullptr;
+		EnemyMember* efMember = nullptr;
 	};
-	int maxY = 0;
-	int maxX = 0;
+	EnemyMember* eSave = nullptr;
+
+	//int maxY = 0;
+	//int maxX = 0;
 
 	int mapY = 2;
 	int mapX = 2;
@@ -30,4 +33,5 @@ public:
 	void MoveRightEnemy(int map[40][20]);
 	void MoveLeftEnemy(int map[40][20]);
 	void MoveDeleteEnemy(int map[40][20]);
+	void HitEnemy(int map[40][20]);
 };

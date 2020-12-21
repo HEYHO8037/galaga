@@ -66,3 +66,14 @@ void Player::ChcekPlayerBullet(int map[40][20])
 }
 
 
+void Player::bulletInit(int map[40][20])
+{
+	Construct(1, center + 1, Y, map);
+}
+
+void Player::bulletMove(int map[40][20])
+{
+	MoveBullet(map);
+}
+
+
