@@ -20,7 +20,7 @@ public:
 	void RightMovePlayer(int map[40][20]);
 	void deleteMovePlayer(int map[40][20]);
 
-	void ChcekPlayerBullet(int map[40][20]);
+	void CheckPlayerBullet(int map[40][20]);
 	void bulletInit(int map[40][20]);
 	void bulletMove(int map[40][20]);
 	void bulletCheck(int map[40][20]);

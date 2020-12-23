@@ -25,6 +25,7 @@ void Map::InitMap()
 void Map::UpdateMap()
 {
 	system("cls");
+
 	for (int i = 0; i < 40; i++)
 	{
 		for (int k = 0; k < 20; k++)

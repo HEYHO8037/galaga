@@ -16,7 +16,7 @@ protected:
 
 public:
 	void Construct(int select, int posX, int posY, int map[40][20]);
-	void Destroy(int map[40][20]);
+	void Destroy(bullet* check, int map[40][20]);
 	void Release();
 	void MoveBullet(int map[40][20]);
 	void CheckBullet(int map[40][20]);

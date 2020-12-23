@@ -25,25 +25,19 @@ void MemoryPool::Construct(int select, int posX, int posY, int map[40][20])
 
 }
 
-void MemoryPool::Destroy(int map[40][20])
+void MemoryPool::Destroy(bullet* bCheck, int map[40][20])
 {
-	bullet* bDSave = bfSave;
-	for (int i = 0; i < count; i++)
+	if (bCheck->check == 1)
 	{
-		bDSave = bDSave->bNext;
-		if (bDSave->check == 1)
-		{
-			break;
-		}
+		map[bCheck->y][bCheck->x] = 0;
+
+		bCheck->bBefore->bNext = bCheck->bNext;
+		bCheck->bNext->bBefore = bCheck->bBefore;
+
+		delete bCheck;
+
+		count--;
 	}
-	map[bDSave->y][bDSave->x] = 0;
-
-	bDSave->bBefore->bNext = bDSave->bNext;
-	bDSave->bNext->bBefore = bDSave->bBefore;
-
-	delete bDSave;
-
-	count--;
 }
 
 void MemoryPool::Release()
@@ -65,30 +59,40 @@ void MemoryPool::MoveBullet(int map[40][20])
 	{
 		if (bMBSave->num == 1)
 		{
-			if (map[bMBSave->y][bMBSave->x] > 1)
+			if (bMBSave->y > 0)
+			{
+				if (map[bMBSave->y][bMBSave->x] < 2)
+				{
+					map[bMBSave->y][bMBSave->x] = 0;
+					bMBSave->y--;
+					map[bMBSave->y][bMBSave->x] += 1;
+				}
+				else if (map[bMBSave->y][bMBSave->x] >= 2)
+				{
+					bMBSave->check = 1;
+					map[bMBSave->y][bMBSave->x] = 2;
+				}
+			}
+			else
 			{
 				bMBSave->check = 1;
-				bMBSave->y++;
-				map[bMBSave->y][bMBSave->x] = 1;
+				Destroy(bMBSave,map);
 			}
-
-			bMBSave->y--;
-			map[bMBSave->y + 1][bMBSave->x] = 0;
-			map[bMBSave->y][bMBSave->x] += 1;
 			
 		}
 		else if (bMBSave->num == 0)
 		{
-			if (map[bMBSave->y][bMBSave->x] > 1)
+			if (bMBSave->y < 39)
 			{
-				bMBSave->check = 1;
-				bMBSave->y--;
+				map[bMBSave->y][bMBSave->x] = 0;
+				bMBSave->y++;
 				map[bMBSave->y][bMBSave->x] += 1;
 			}
-
-			bMBSave->y++;
-			map[bMBSave->y - 1][bMBSave->x] = 0;
-			map[bMBSave->y][bMBSave->x] += 1;
+			else
+			{
+				bMBSave->check = 1;
+				Destroy(bMBSave, map);
+			}
 		}
 		bMBSave = bMBSave->bNext;
 	}
@@ -96,5 +100,14 @@ void MemoryPool::MoveBullet(int map[40][20])
 
 void MemoryPool::CheckBullet(int map[40][20])
 {
+	bullet* bcbSave = bfSave;
+	for (int i = 0; i < count; i++)
+	{
+		if (bcbSave->check == 1)
+		{
+			Destroy(bcbSave, map);
+		}
+		bcbSave = bcbSave->bNext;
 
+	}
 }

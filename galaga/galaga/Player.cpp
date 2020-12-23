@@ -49,7 +49,7 @@ void Player::deleteMovePlayer(int map[40][20])
 	}
 }
 
-void Player::ChcekPlayerBullet(int map[40][20])
+void Player::CheckPlayerBullet(int map[40][20])
 {
 	for (int i = 3; i >= 0; i--)
 	{
@@ -74,6 +74,11 @@ void Player::bulletInit(int map[40][20])
 void Player::bulletMove(int map[40][20])
 {
 	MoveBullet(map);
+}
+
+void Player::bulletCheck(int map[40][20])
+{
+	CheckBullet(map);
 }
 
 

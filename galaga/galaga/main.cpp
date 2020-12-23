@@ -10,22 +10,32 @@ int main(void)
 
 	map1->InitMap();
 	p1->InitPlayer(map1->map);
+	e1->InitEnemy(9);
+
+	e1->ShowEnemy(map1->map);
+	map1->UpdateMap();
+
+	Sleep(500);
 
 	p1->bulletInit(map1->map);
 	map1->UpdateMap();
 
-	e1->InitEnemy(9, map1->map);
+	while (1)
+	{
+		p1->bulletMove(map1->map);
+		e1->HitEnemy(map1->map);
+		e1->DestroyEnemy(map1->map);
+		p1->bulletCheck(map1->map);
+
+		map1->UpdateMap();
+
+		//Sleep(300);
+	}
+
 	map1->UpdateMap();
 
-	e1->MoveDeleteEnemy(map1->map);
-	map1->UpdateMap();
 
-	//while (1)
-	//{
-	//	p1->bulletMove(map1->map);
-	//	map1->UpdateMap();
-	//	Sleep(500);
-	//}
+
 
 
 
