@@ -28,8 +28,39 @@ void Enemy::InitEnemy(int enemynumber)
 
 		mapX += 4;
 		eSave = name;
+		adSave[i] = name;
+	}
+
+	
+}
+
+void Enemy::checkListEnemy()
+{
+	if (eSave == nullptr)
+	{
+		for (int i = 0; i < enemycount; i++)
+		{
+			if (adSave[i] != nullptr)
+			{
+				eSave = adSave[i];
+				break;
+			}
+		}
 	}
 	
+	if (eSave->efMember == nullptr)
+	{
+		for (int i = 0; i < enemycount; i++)
+		{
+			if (adSave[i] != nullptr)
+			{
+				eSave->efMember = adSave[i];
+				eSave->efMember->ebMember = eSave;
+			}
+			eSave = eSave->efMember;
+		}
+	}
+
 }
 
 
@@ -139,6 +170,7 @@ void Enemy::DestroyEnemy(int map[40][20])
 	bool check = false;
 	EnemyMember* deEnemy = eSave;
 	EnemyMember* desEnemy;
+	int emcount = enemycount;
 
 	for (int count = 0; count < enemycount; count++)
 	{
@@ -157,22 +189,31 @@ void Enemy::DestroyEnemy(int map[40][20])
 				break;
 			}
 		}
+
 		if (check)
 		{
 			MoveDeleteEnemy(deEnemy, map);
-			deEnemy->ebMember->efMember = deEnemy->efMember;
-			deEnemy->efMember->ebMember = deEnemy->ebMember;
+			if (deEnemy->ebMember != nullptr)
+			{
+				deEnemy->ebMember->efMember = deEnemy->efMember;
+			}
+			if (deEnemy->efMember != nullptr)
+			{
+				deEnemy->efMember->ebMember = deEnemy->ebMember;
+			}
 			desEnemy = deEnemy->efMember;
 
 			delete deEnemy;
 			deEnemy = desEnemy;
-			enemycount--;
+			emcount--;
 		}
 		else
 		{
 			deEnemy = deEnemy->efMember;
 		}
 	}
+
+	enemycount = emcount;
 }
 
 void Enemy::ReleaseEnemy()

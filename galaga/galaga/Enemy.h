@@ -19,7 +19,6 @@ protected:
 	};
 	EnemyMember* eSave = nullptr;
 
-
 	int mapY = 2;
 	int mapX = 2;
 
@@ -27,7 +26,10 @@ protected:
 	int enemycount = 0;
 	int random = rand() % 2;
 
+	EnemyMember* adSave[];
+
 public:
+	void checkListEnemy();
 	void InitEnemy(int enemynumber);
 	void ShowEnemy(int map[40][20]);
 	void MoveRightEnemy(int map[40][20]);

@@ -22,6 +22,7 @@ int main(void)
 
 	while (1)
 	{
+		e1->checkListEnemy();
 		p1->bulletMove(map1->map);
 		e1->HitEnemy(map1->map);
 		e1->DestroyEnemy(map1->map);
@@ -29,7 +30,6 @@ int main(void)
 
 		map1->UpdateMap();
 
-		//Sleep(300);
 	}
 
 	map1->UpdateMap();
