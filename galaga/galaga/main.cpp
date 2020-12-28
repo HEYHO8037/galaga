@@ -17,22 +17,23 @@ int main(void)
 
 	Sleep(500);
 
-	p1->bulletInit(map1->map);
+	e1->MoveDeleteAllEnemy(map1->map);
 	map1->UpdateMap();
 
-	while (1)
-	{
-		e1->checkListEnemy();
-		p1->bulletMove(map1->map);
-		e1->HitEnemy(map1->map);
-		e1->DestroyEnemy(map1->map);
-		p1->bulletCheck(map1->map);
+	//while (1)
+	//{
+	//	e1->checkListEnemy();
+	//	p1->bulletMove(map1->map);
 
-		map1->UpdateMap();
+	//	e1->HitEnemy(map1->map);
+	//	e1->DestroyEnemy(map1->map);
+	//	p1->bulletCheck(map1->map);
 
-	}
+	//	map1->UpdateMap();
 
-	map1->UpdateMap();
+	//}
+
+	//map1->UpdateMap();
 
 
 

@@ -1,4 +1,2 @@
-﻿  main.cpp
-C:\Users\haeho\Desktop\PERSONAL\C++\갤러그\galaga\galaga\galaga\Enemy.h(29,23): warning C4200: 비표준 확장이 사용됨: 구조체/공용 구조체의 배열 크기가 0입니다.
-C:\Users\haeho\Desktop\PERSONAL\C++\갤러그\galaga\galaga\galaga\Enemy.h(29,23): message : 이 멤버는 기본값으로 설정된 생성자 또는 복사/이동 대입 연산자에서 무시됩니다.
+﻿  Enemy.cpp
   galaga.vcxproj -> C:\Users\haeho\Desktop\PERSONAL\C++\갤러그\galaga\galaga\Debug\galaga.exe
