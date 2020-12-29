@@ -1,7 +1,7 @@
 #pragma once
-#include "MemoryPool.h"
+#include "Bullet.h"
 
-class Player : MemoryPool
+class Player : Bullet
 {
 protected:
 	int playerMember[3][3] =

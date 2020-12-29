@@ -20,6 +20,9 @@ int main(void)
 	e1->MoveDeleteAllEnemy(map1->map);
 	map1->UpdateMap();
 
+	e1->MoveRightEnemy(map1->map);
+	map1->UpdateMap();
+
 	//while (1)
 	//{
 	//	e1->checkListEnemy();
