@@ -7,19 +7,14 @@ void Enemy::InitEnemy(int enemynumber)
 
 	for (int i = 0; i < enemycount; i++)
 	{
-		EnemyMember* emember = new EnemyMember;
 		if (i % 4 == 0 && i != 0)
 		{
 			mapY += 3;
 			mapX = 2;
 		}
-		emember->x = mapX;
-		emember->y = mapY;
 
-		emember = &total[i];
-
-		total[i].x = emember->x;
-		total[i].y = emember->y;
+		total[i].x = mapX;
+		total[i].y = mapY;
 
 		mapX += 4;
 
@@ -169,3 +164,49 @@ void Enemy::ReleaseAllEnemy()
 	delete[] total;
 }
 
+void Enemy::bulletCreate(int count)
+{
+	Construct(count);
+}
+
+
+void Enemy::bulletInit(int map[40][20])
+{
+	int shotCount = enemycount % 4;
+
+	if (shotCount == 0 && enemycount != 0)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			InitBullet(0, total[enemycount - i].x, total[enemycount - i].y, map);
+		}
+	}
+	else if (shotCount != 0 && enemycount != 0)
+	{
+		for (int i = 0; i < shotCount; i++)
+		{
+			InitBullet(0, total[enemycount - i].x, total[enemycount - i].y, map);
+		}
+	}
+
+}
+
+void  Enemy::bulletMove(int map[40][20])
+{
+	MoveBullet(map);
+}
+
+void  Enemy::bulletCheck(int map[40][20])
+{
+	CheckBullet(map);
+}
+
+void  Enemy::bulletDestroy(int map[40][20])
+{
+	Destroy(map);
+}
+
+void  Enemy::bulletRelease()
+{
+	Release();
+}

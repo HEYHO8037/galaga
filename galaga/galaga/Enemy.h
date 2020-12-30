@@ -1,6 +1,7 @@
 #pragma once
 #include <random>
-class Enemy
+#include "Bullet.h"
+class Enemy : Bullet
 {
 protected:
 	struct EnemyMember
@@ -34,4 +35,12 @@ public:
 	void HitCheckEnemy(int map[40][20]);
 	void DestroyEnemy(int map[40][20]);
 	void ReleaseAllEnemy();
+
+public:
+	void bulletCreate(int count);
+	void bulletInit(int map[40][20]);
+	void bulletMove(int map[40][20]);
+	void bulletCheck(int map[40][20]);
+	void bulletDestroy(int map[40][20]);
+	void bulletRelease();
 };

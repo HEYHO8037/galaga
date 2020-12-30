@@ -9,7 +9,7 @@ protected:
 		int x, y;
 		bool check = false;
 	};
-	bulletMember* total;
+	bulletMember* totBul;
 	int memCount = 0;
 
 public:

@@ -10,7 +10,11 @@ int main(void)
 
 	map1->InitMap();
 	p1->InitPlayer(map1->map);
-	e1->InitEnemy(9);
+	p1->bulletCreate(100);
+	e1->InitEnemy(8);
+	e1->bulletCreate(100);
+
+	
 
 	e1->ShowEnemy(map1->map);
 	map1->UpdateMap();
@@ -20,7 +24,14 @@ int main(void)
 	e1->MoveDeleteAllEnemy(map1->map);
 	map1->UpdateMap();
 
+	Sleep(500);
+
 	e1->MoveRightEnemy(map1->map);
+	map1->UpdateMap();
+
+	Sleep(500);
+
+	e1->bulletInit(map1->map);
 	map1->UpdateMap();
 
 	//while (1)

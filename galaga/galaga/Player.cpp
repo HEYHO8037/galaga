@@ -1,10 +1,5 @@
 #include "Player.h"
 
-Player::Player()
-{
-
-}
-
 void Player::InitPlayer(int map[40][20])
 {
 	for (int i = 2; i >= 0; i--)
@@ -66,6 +61,12 @@ void Player::CheckPlayerBullet(int map[40][20])
 }
 
 
+void Player::bulletCreate(int count)
+{
+	Construct(count);
+}
+
+
 void Player::bulletInit(int map[40][20])
 {
 	InitBullet(1, center + 1, Y, map);
@@ -81,4 +82,11 @@ void Player::bulletCheck(int map[40][20])
 	CheckBullet(map);
 }
 
-
+void Player:: bulletDestroy(int map[40][20])
+{
+	Destroy(map);
+}
+void Player::bulletRelease()
+{
+	Release();
+}
