@@ -69,7 +69,8 @@ void Player::bulletCreate(int count)
 
 void Player::bulletInit(int map[40][20])
 {
-	InitBullet(1, center + 1, Y, map);
+	InitBullet(1, center+1, Y);
+	showBullet(map);
 }
 
 void Player::bulletMove(int map[40][20])

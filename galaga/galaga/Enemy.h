@@ -14,8 +14,8 @@ protected:
 		};
 		int hp = 3;
 
-		int x = 0;
-		int y = 0;
+		int x;
+		int y;
 	};
 
 	EnemyMember* total;

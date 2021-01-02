@@ -14,8 +14,6 @@ int main(void)
 	e1->InitEnemy(8);
 	e1->bulletCreate(100);
 
-	
-
 	e1->ShowEnemy(map1->map);
 	map1->UpdateMap();
 
@@ -31,8 +29,20 @@ int main(void)
 
 	Sleep(500);
 
+	p1->bulletInit(map1->map);
+	map1->UpdateMap();
+
+	Sleep(500);
+
 	e1->bulletInit(map1->map);
 	map1->UpdateMap();
+
+	Sleep(500);
+
+	e1->bulletMove(map1->map);
+	p1->bulletMove(map1->map);
+	map1->UpdateMap();
+
 
 	//while (1)
 	//{

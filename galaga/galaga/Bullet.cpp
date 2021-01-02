@@ -1,4 +1,13 @@
 #include "Bullet.h"
+using namespace std;
+
+void Bullet::showBullet(int map[40][20])
+{
+	for (int i = 0; i < memCount; i++)
+	{
+		map[totBul[i].y][totBul[i].x] += 1;
+	}
+}
 
 
 void Bullet::Construct(int count)
@@ -6,14 +15,12 @@ void Bullet::Construct(int count)
 	totBul = new bulletMember[count];
 }
 
-void Bullet::InitBullet(int ItemSelect, int posX, int posY, int map[40][20])
+void Bullet::InitBullet(int ItemSelect, int posX, int posY)
 {
+	totBul[memCount].select = ItemSelect;
 	totBul[memCount].x = posX;
 	totBul[memCount].y = posY;
-	totBul[memCount].select = ItemSelect;
 	totBul[memCount].check = false;
-
-	map[totBul[memCount].y][totBul[memCount].x] += 1;
 
 	memCount++;
 }

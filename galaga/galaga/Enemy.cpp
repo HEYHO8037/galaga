@@ -7,21 +7,18 @@ void Enemy::InitEnemy(int enemynumber)
 
 	for (int i = 0; i < enemycount; i++)
 	{
+		EnemyMember* emember = new EnemyMember;
 		if (i % 4 == 0 && i != 0)
 		{
 			mapY += 3;
 			mapX = 2;
 		}
-
 		total[i].x = mapX;
 		total[i].y = mapY;
 
 		mapX += 4;
-
-		
 	}
-	
-	
+
 }
 
 
@@ -173,21 +170,26 @@ void Enemy::bulletCreate(int count)
 void Enemy::bulletInit(int map[40][20])
 {
 	int shotCount = enemycount % 4;
+	EnemyMember* save = total + (enemycount - 1);
 
 	if (shotCount == 0 && enemycount != 0)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			InitBullet(0, total[enemycount - i].x, total[enemycount - i].y, map);
+			InitBullet(0, save->x + 1, save->y + 2);
+			save -= 1;
 		}
 	}
 	else if (shotCount != 0 && enemycount != 0)
 	{
 		for (int i = 0; i < shotCount; i++)
 		{
-			InitBullet(0, total[enemycount - i].x, total[enemycount - i].y, map);
+			InitBullet(0, save->x + 1, save->y + 2);
+			save -= 1;
 		}
 	}
+
+	showBullet(map);
 
 }
 
