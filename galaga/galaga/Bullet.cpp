@@ -5,7 +5,10 @@ void Bullet::showBullet(int map[40][20])
 {
 	for (int i = 0; i < memCount; i++)
 	{
-		map[totBul[i].y][totBul[i].x] += 1;
+		if (totBul[i].check == false)
+		{
+			map[totBul[i].y][totBul[i].x] += 1;
+		}
 	}
 }
 
@@ -32,7 +35,6 @@ void Bullet::Destroy(int map[40][20])
 		if (totBul[i].check == true)
 		{
 			map[totBul[i].y][totBul[i].x] = 0;
-			delete[i] totBul;
 		}
 	}
 }
@@ -46,37 +48,47 @@ void Bullet::MoveBullet(int map[40][20])
 {
 	for (int i = 0; i < memCount; i++)
 	{
-		if (totBul[i].select == 1)
+		if (totBul[i].check == false)
 		{
-			map[totBul[i].y][totBul[i].x] = 0;
-			totBul[i].y--;
-			map[totBul[i].y][totBul[i].x] += 1;
-		}
-		else if (totBul[i].select == 0)
-		{
-			map[totBul[i].y][totBul[i].x] = 0;
-			totBul[i].y++;
-			map[totBul[i].y][totBul[i].x] += 1;
+			if (totBul[i].select == 1)
+			{
+				map[totBul[i].y][totBul[i].x] = 0;
+				totBul[i].y--;
+				map[totBul[i].y][totBul[i].x] += 1;
+			}
+			else if (totBul[i].select == 0)
+			{
+				map[totBul[i].y][totBul[i].x] = 0;
+				totBul[i].y++;
+				map[totBul[i].y][totBul[i].x] += 1;
+			}
 		}
 	}
 }
 
-void Bullet::CheckBullet(int map[40][20])
+void Bullet::CheckBullet(int posX, int posY, int map[40][20])
 {
 	for (int i = 0; i < memCount; i++)
 	{
-		if (map[totBul[i].y][totBul[i].x] > 1)
+		for (int k = 0; k < 2; k++)
 		{
-			totBul[i].check = true;
+			for (int j = 0; j < 3; j++)
+			{
+				if (totBul[i].x == posX + j && totBul[i].y == posY + k)
+				{
+					totBul[i].check = true;
+				}
+				if (totBul[i].x < 0 || totBul[i].x >= 18)
+				{
+					totBul[i].check = true;
+				}
+				if (totBul[i].y < 0 || totBul[i].y >= 38)
+				{
+					totBul[i].check = true;
+				}
+			}
 		}
-	}
 
-	for (int i = 0; i < memCount; i++)
-	{
-		if (totBul[i].check == true)
-		{
-			map[totBul[i].y][totBul[i].x] = 0;
-			delete[i] totBul;
-		}
+
 	}
 }

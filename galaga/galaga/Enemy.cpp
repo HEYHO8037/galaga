@@ -26,11 +26,14 @@ void Enemy::ShowEnemy(int map[40][20])
 {
 	for (int i = 0; i < enemycount; i++)
 	{
-		for (int k = 0; k < 3; k++)
+		if (total[i].check == false)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 2; k++)
 			{
-				map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
+				for (int j = 0; j < 3; j++)
+				{
+					map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
+				}
 			}
 		}
 	}
@@ -42,7 +45,7 @@ void Enemy::MoveDeleteAllEnemy(int map[40][20])
 {	
 	for (int i = 0; i < enemycount; i++)
 	{
-		for (int k = 0; k < 3; k++)
+		for (int k = 0; k < 2; k++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
@@ -57,20 +60,23 @@ void Enemy::MoveRightEnemy(int map[40][20])
 {
 	for (int i = 0; i < enemycount; i++)
 	{
-		if(total[enemycount].x < 17)
+		if (total[i].check == false)
 		{
-			total[i].x++;
-		}
-		else
-		{
-			total[i].x;
-		}
-
-		for (int k = 0; k < 3; k++)
-		{
-			for (int j = 0; j < 3; j++)
+			if (total[enemycount - 1].x < 19)
 			{
-				map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
+				total[i].x++;
+			}
+			else
+			{
+				total[i].x;
+			}
+
+			for (int k = 0; k < 2; k++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
+				}
 			}
 		}
 	}
@@ -80,20 +86,23 @@ void Enemy::MoveLeftEnemy(int map[40][20])
 {
 	for (int i = 0; i < enemycount; i++)
 	{
-		if (total[0].x > 0)
+		if (total[i].check == false)
 		{
-			total[i].x--;
-		}
-		else
-		{
-			total[i].x;
-		}
-
-		for (int k = 0; k < 3; k++)
-		{
-			for (int j = 0; j < 3; j++)
+			if (total[0].x > 0)
 			{
-				map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
+				total[i].x--;
+			}
+			else
+			{
+				total[i].x;
+			}
+
+			for (int k = 0; k < 2; k++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
+				}
 			}
 		}
 	}
@@ -101,13 +110,17 @@ void Enemy::MoveLeftEnemy(int map[40][20])
 
 void Enemy::HitCheckEnemy(int map[40][20])
 {
+	
 	for (int i = 0; i < enemycount; i++)
 	{
-		for (int k = 0; k < 3; k++)
+		if (total[i].check == false)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 2; k++)
 			{
-				total[i].member[k][j] = map[total[i].x + k][total[i].y + j];
+				for (int j = 0; j < 3; j++)
+				{
+					total[i].member[k][j] = map[total[i].y + k][total[i].x + j];
+				}
 			}
 		}
 	}
@@ -115,45 +128,34 @@ void Enemy::HitCheckEnemy(int map[40][20])
 
 void Enemy::DestroyEnemy(int map[40][20])
 {
-	bool check = false;
-	int desMember = 0;
 
 	for (int i = 0; i < enemycount; i++)
 	{
-		for (int k = 0; k < 3; k++)
+		for (int k = 0; k < 2; k++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
 				if (total[i].member[k][j] > 1)
 				{
-					desMember = i;
-					check = true;
-					break;
+					total[i].check = true;
 				}
 			}
-			if (check)
-			{
-				break;
-			}
-		}
-		if (check)
-		{
-			break;
 		}
 	}
 
-	if (check)
+	for (int m = 0; m < enemycount; m++)
 	{
-		for (int i = 0; i < 3; i++)
+		if (total[m].check == true)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int i = 0; i < 3; i++)
 			{
-				map[total[desMember].y + i][total[desMember].x + j] = 0;
+				for (int j = 0; j < 3; j++)
+				{
+					map[total[m].y + i][total[m].x + j] = 0;
+				}
 			}
 		}
 	}
-
-	delete [desMember]total;
 }
 
 void Enemy::ReleaseAllEnemy()
@@ -198,9 +200,9 @@ void  Enemy::bulletMove(int map[40][20])
 	MoveBullet(map);
 }
 
-void  Enemy::bulletCheck(int map[40][20])
+void  Enemy::bulletCheck(int posX, int posY, int map[40][20])
 {
-	CheckBullet(map);
+	CheckBullet(posX, posY, map);
 }
 
 void  Enemy::bulletDestroy(int map[40][20])

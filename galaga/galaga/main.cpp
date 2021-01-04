@@ -24,10 +24,16 @@ int main(void)
 
 	Sleep(500);
 
-	e1->MoveRightEnemy(map1->map);
+	e1->MoveLeftEnemy(map1->map);
 	map1->UpdateMap();
 
 	Sleep(500);
+
+	e1->MoveDeleteAllEnemy(map1->map);
+	map1->UpdateMap();
+
+	e1->MoveRightEnemy(map1->map);
+	map1->UpdateMap();
 
 	p1->bulletInit(map1->map);
 	map1->UpdateMap();
@@ -37,27 +43,24 @@ int main(void)
 	e1->bulletInit(map1->map);
 	map1->UpdateMap();
 
-	Sleep(500);
+	while (1)
+	{
+		Sleep(500);
 
-	e1->bulletMove(map1->map);
-	p1->bulletMove(map1->map);
-	map1->UpdateMap();
+		p1->bulletMove(map1->map);
+		e1->bulletMove(map1->map);
 
+		p1->bulletCheck(e1->enemycount, e1->total, map1->map);
+		e1->bulletCheck(p1->center, p1->Y, map1->map);
+		e1->HitCheckEnemy(map1->map);
 
-	//while (1)
-	//{
-	//	e1->checkListEnemy();
-	//	p1->bulletMove(map1->map);
+		p1->CheckPlayerBullet(map1->map);
+		e1->DestroyEnemy(map1->map);
+		p1->bulletDestroy(map1->map);
+		e1->bulletDestroy(map1->map);
 
-	//	e1->HitEnemy(map1->map);
-	//	e1->DestroyEnemy(map1->map);
-	//	p1->bulletCheck(map1->map);
-
-	//	map1->UpdateMap();
-
-	//}
-
-	//map1->UpdateMap();
+		map1->UpdateMap();
+	}
 
 
 

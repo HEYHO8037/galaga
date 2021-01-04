@@ -2,7 +2,7 @@
 
 void Player::InitPlayer(int map[40][20])
 {
-	for (int i = 2; i >= 0; i--)
+	for (int i = 1; i >= 0; i--)
 	{
 		for (int k = 0; k < 3; k++)
 		{
@@ -35,7 +35,7 @@ void Player::RightMovePlayer(int map[40][20])
 
 void Player::deleteMovePlayer(int map[40][20])
 {
-	for (int i = 3; i >= 0; i--)
+	for (int i = 1; i >= 0; i--)
 	{
 		for (int k = 0; k < 3; k++)
 		{
@@ -46,18 +46,21 @@ void Player::deleteMovePlayer(int map[40][20])
 
 void Player::CheckPlayerBullet(int map[40][20])
 {
-	for (int i = 3; i >= 0; i--)
+	for (int i = 1; i >= 0; i--)
 	{
 		for (int k = 0; k < 3; k++)
 		{
 			if (map[Y + i][center + k] > 1)
 			{
-				break;
+				check = true;
 			}
 		}
 	}
-
-	deleteMovePlayer(map);
+	
+	if (check)
+	{
+		deleteMovePlayer(map);
+	}
 }
 
 
@@ -69,7 +72,7 @@ void Player::bulletCreate(int count)
 
 void Player::bulletInit(int map[40][20])
 {
-	InitBullet(1, center+1, Y);
+	InitBullet(1, center+1, Y-1);
 	showBullet(map);
 }
 
@@ -78,9 +81,14 @@ void Player::bulletMove(int map[40][20])
 	MoveBullet(map);
 }
 
-void Player::bulletCheck(int map[40][20])
+void Player::bulletCheck(int num, EnemyMember *save , int map[40][20])
 {
-	CheckBullet(map);
+	for (int i = 0; i < num; i++)
+	{
+		CheckBullet(save->x, save->y, map);
+		save += 1;
+	}
+	
 }
 
 void Player:: bulletDestroy(int map[40][20])
