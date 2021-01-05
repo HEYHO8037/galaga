@@ -25,8 +25,6 @@ protected:
 	int mapY = 2;
 	int mapX = 2;
 
-	int random = rand() % 2;
-
 public:
 	void InitEnemy(int enemynumber);
 	void ShowEnemy(int map[40][20]);

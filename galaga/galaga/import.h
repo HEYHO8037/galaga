@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <time.h>
 #include <Windows.h>
+#include <conio.h>
 
 #include "Enemy.h"
 #include "Map.h"

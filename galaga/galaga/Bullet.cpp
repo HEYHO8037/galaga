@@ -74,15 +74,11 @@ void Bullet::CheckBullet(int posX, int posY, int map[40][20])
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				if (totBul[i].x == posX + j && totBul[i].y == posY + k)
+				if (totBul[i].x == posX + j && totBul[i].y == posY + k && map[totBul[i].y][totBul[i].x] > 1)
 				{
 					totBul[i].check = true;
 				}
-				if (totBul[i].x < 0 || totBul[i].x >= 18)
-				{
-					totBul[i].check = true;
-				}
-				if (totBul[i].y < 0 || totBul[i].y >= 38)
+				else if (totBul[i].y == 1 || totBul[i].y >= 38)
 				{
 					totBul[i].check = true;
 				}
