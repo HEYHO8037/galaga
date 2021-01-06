@@ -15,6 +15,7 @@ void Bullet::showBullet(int map[40][20])
 
 void Bullet::Construct(int count)
 {
+	memCount = 0;
 	totBul = new bulletMember[count];
 }
 
@@ -74,7 +75,7 @@ void Bullet::CheckBullet(int posX, int posY, int map[40][20])
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				if (totBul[i].x == posX + j && totBul[i].y == posY + k && map[totBul[i].y][totBul[i].x] > 1)
+				if (totBul[i].x == posX + j && totBul[i].y == posY + k && map[totBul[i].y][totBul[i].x] == 2)
 				{
 					totBul[i].check = true;
 				}

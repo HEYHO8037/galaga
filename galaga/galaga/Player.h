@@ -14,6 +14,7 @@ protected:
 public:
 	int center = 10;
 	int Y = 30;
+	bool dead = false;
 
 public:
 	void InitPlayer(int map[40][20]);

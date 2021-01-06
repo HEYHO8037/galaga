@@ -21,21 +21,26 @@ class Enemy : Bullet
 public:
 	EnemyMember* total;
 	int enemycount = 0;
+	int mEnemycount = 0;
 protected:
 	int mapY = 2;
 	int mapX = 2;
 
 public:
 	void InitEnemy(int enemynumber);
-	void ShowEnemy(int map[40][20]);
+	void ShowAllEnemy(int map[40][20]);
+	void ShowEnemy(int eneNum, int map[40][20]);
 	void MoveRightEnemy(int map[40][20]);
 	void MoveLeftEnemy(int map[40][20]);
 	void MoveDeleteAllEnemy(int map[40][20]);
+	void MoveDeleteEnemy(int num, int eneNum, int map[40][20]);
 	void HitCheckEnemy(int map[40][20]);
 	void DestroyEnemy(int map[40][20]);
 	void ReleaseAllEnemy();
+	void MoveRandEnemy(int map[40][20]);
 
 public:
+	void RandBullet(int map[40][20]);
 	void bulletCreate(int count);
 	void bulletInit(int map[40][20]);
 	void bulletMove(int map[40][20]);

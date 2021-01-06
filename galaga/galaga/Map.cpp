@@ -71,7 +71,7 @@ void Map::CreateBuffer()
 void Map::WriteBuffer(int x, int y, const char str[])
 {
 	DWORD dw;
-	COORD CursorPosition = { x, y };
+	COORD CursorPosition = { x , y };
 	SetConsoleCursorPosition(hBuffer[nScreenIndex], CursorPosition);
 	WriteFile(hBuffer[nScreenIndex], str, strlen(str) , &dw, NULL);
 }
@@ -79,7 +79,14 @@ void Map::WriteBuffer(int x, int y, const char str[])
 void Map::FlippingBuffer()
 {
 	SetConsoleActiveScreenBuffer(hBuffer[nScreenIndex]);
-	nScreenIndex = !nScreenIndex;
+	if (nScreenIndex == 0)
+	{
+		nScreenIndex = 1;
+	}
+	else if (nScreenIndex == 1)
+	{
+		nScreenIndex = 0;
+	}
 }
 
 void Map::ClearBuffer()

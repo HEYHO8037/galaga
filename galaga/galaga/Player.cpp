@@ -59,6 +59,7 @@ void Player::CheckPlayerBullet(int map[40][20])
 	
 	if (check)
 	{
+		dead = true;
 		deleteMovePlayer(map);
 	}
 }
