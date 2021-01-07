@@ -11,6 +11,7 @@ protected:
 		int x;
 		int y;
 		bool check = false;
+		bool destroyed = false;
 	};
 	bulletMember* totBul;
 	int memCount = 0;

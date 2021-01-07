@@ -35,7 +35,6 @@ public:
 	void MoveDeleteAllEnemy(int map[40][20]);
 	void MoveDeleteEnemy(int num, int eneNum, int map[40][20]);
 	void HitCheckEnemy(int map[40][20]);
-	void DestroyEnemy(int map[40][20]);
 	void ReleaseAllEnemy();
 	void MoveRandEnemy(int map[40][20]);
 

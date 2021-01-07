@@ -36,7 +36,7 @@ void Enemy::ShowAllEnemy(int map[40][20])
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
+					map[total[i].y + k][total[i].x + j] = total[i].member[k][j];
 				}
 			}
 		}
@@ -51,7 +51,7 @@ void Enemy::ShowEnemy(int eneNum, int map[40][20])
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				map[total[eneNum].y + k][total[eneNum].x + j] += total[eneNum].member[k][j];
+				map[total[eneNum].y + k][total[eneNum].x + j] = total[eneNum].member[k][j];
 			}
 		}
 	}
@@ -114,24 +114,12 @@ void Enemy::MoveDeleteEnemy(int num, int eneNum, int map[40][20])
 
 void Enemy::MoveRightEnemy(int map[40][20])
 {
-	for (int i = 0; i < enemycount; i++)
+	if (total[enemycount-1].x+2 < 18)
 	{
-		if (total[i].x + 2 < 18 && map[total[i].y][total[i].x + 3] == 0)
+		for (int i = 0; i < enemycount; i++)
 		{
-			if (total[i].check == false)
-			{
-				total[i].x++;
-				MoveDeleteEnemy(0, i, map);
-				ShowEnemy(i, map);
-			}
-			else
-			{
-				continue;
-			}
-		}
-		else
-		{
-			MoveDeleteEnemy(2, i, map);
+			total[i].x++;
+			MoveDeleteEnemy(0, i, map);
 			ShowEnemy(i, map);
 		}
 	}
@@ -139,24 +127,12 @@ void Enemy::MoveRightEnemy(int map[40][20])
 
 void Enemy::MoveLeftEnemy(int map[40][20])
 {
-	for (int i = 0; i < enemycount; i++)
+	if (total[0].x > 1)
 	{
-		if (total[i].x > 1 && map[total[i].y][total[i].x - 1] == 0)
+		for (int i = 0; i < enemycount; i++)
 		{
-			if (total[i].check == false)
-			{
-				total[i].x--;
-				MoveDeleteEnemy(1, i, map);
-				ShowEnemy(i, map);
-			}
-			else
-			{
-				continue;
-			}
-		}
-		else
-		{
-			MoveDeleteEnemy(2, i, map);
+			total[i].x--;
+			MoveDeleteEnemy(1, i, map);
 			ShowEnemy(i, map);
 		}
 	}
@@ -185,25 +161,8 @@ void Enemy::MoveRandEnemy(int map[40][20])
 }
 
 
-void Enemy::HitCheckEnemy(int map[40][20])
-{
-	
-	for (int i = 0; i < enemycount; i++)
-	{
-		if (total[i].check == false)
-		{
-			for (int k = 0; k < 2; k++)
-			{
-				for (int j = 0; j < 3; j++)
-				{
-					total[i].member[k][j] = map[total[i].y + k][total[i].x + j];
-				}
-			}
-		}
-	}
-}
 
-void Enemy::DestroyEnemy(int map[40][20])
+void Enemy::HitCheckEnemy(int map[40][20])
 {
 	mEnemycount = 0;
 	int destroy = -1;
@@ -214,24 +173,31 @@ void Enemy::DestroyEnemy(int map[40][20])
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				if (total[i].member[k][j] > 1)
+				if (map[total[i].y+k][total[i].x+j] > 1)
 				{
-					total[i].check = true;
+					destroy = i;
+				}
+				else if (map[total[i].y][total[i].x] == 2 || map[total[i].y ][total[i].x + 2] == 2)
+				{
+					destroy = i;
 				}
 			}
 		}
 	}
 
-	if (!destroy == -1)
+	if (destroy != -1)
 	{
-		for (int i = 0; i < 3; i++)
+		if (total[destroy].hp == 0)
 		{
-			for (int j = 0; j < 3; j++)
-			{
-				map[total[destroy].y + i][total[destroy].x + j] = 0;
-			}
+			total[destroy].check = true;
+			MoveDeleteEnemy(2, destroy, map);
 		}
+
+		total[destroy].hp--;
+		ShowEnemy(destroy, map);
 	}
+
+
 
 	for (int i = 0; i < enemycount; i++)
 	{
@@ -270,28 +236,53 @@ void Enemy::RandBullet(int map[40][20])
 void Enemy::bulletInit(int map[40][20])
 {
 	int shotCount = mEnemycount % 4;
+	int count = 0;
 	EnemyMember* save = total + (enemycount - 1);
 
 
 	if (shotCount == 0 && enemycount != 0)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int k = 0; k < enemycount; k++)
 		{
-			if (save->check == false)
+			if (count != 4)
 			{
-				InitBullet(0, save->x + 1, save->y + 2);
-				save -= 1;
+				if (save->check == false)
+				{
+					InitBullet(0, save->x + 1, save->y + 2);
+					save -= 1;
+					count++;
+				}
+				else if (save->check == true)
+				{
+					save -= 1;
+				}
+			}
+			else if (count == 4)
+			{
+				break;
 			}
 		}
 	}
 	else if (shotCount != 0 && enemycount != 0)
 	{
-		for (int i = 0; i < shotCount; i++)
+		for (int k = 0; k < enemycount; k++)
 		{
-			if (save->check == false)
+			if (count != shotCount)
 			{
-				InitBullet(0, save->x + 1, save->y + 2);
-				save -= 1;
+				if (save->check == false)
+				{
+					InitBullet(0, save->x + 1, save->y + 2);
+					save -= 1;
+					count++;
+				}
+				else if (save->check == true)
+				{
+					save -= 1;
+				}
+			}
+			else if (count == shotCount)
+			{
+				break;
 			}
 		}
 	}

@@ -54,6 +54,10 @@ void Player::CheckPlayerBullet(int map[40][20])
 			{
 				check = true;
 			}
+			else if (map[Y][center] == 2 || map[Y][center + 2] == 2)
+			{
+				check = true;
+			}
 		}
 	}
 	
@@ -86,9 +90,14 @@ void Player::bulletCheck(int num, EnemyMember *save , int map[40][20])
 {
 	for (int i = 0; i < num; i++)
 	{
-		CheckBullet(save->x, save->y, map);
-		save += 1;
+		if (save->check == false)
+		{
+			CheckBullet(save->x, save->y, map);
+			save += 1;
+		}
 	}
+
+	save -= (num);
 	
 }
 
