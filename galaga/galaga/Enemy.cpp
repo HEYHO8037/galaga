@@ -11,7 +11,6 @@ void Enemy::InitEnemy(int enemynumber)
 
 	for (int i = 0; i < enemycount; i++)
 	{
-		EnemyMember* emember = new EnemyMember;
 		if (i % 4 == 0 && i != 0)
 		{
 			mapY += 3;
@@ -22,7 +21,6 @@ void Enemy::InitEnemy(int enemynumber)
 
 		mapX += 4;
 	}
-
 }
 
 
@@ -165,7 +163,6 @@ void Enemy::MoveRandEnemy(int map[40][20])
 void Enemy::HitCheckEnemy(int map[40][20])
 {
 	mEnemycount = 0;
-	int destroy = -1;
 
 	for (int i = 0; i < enemycount; i++)
 	{
@@ -175,26 +172,19 @@ void Enemy::HitCheckEnemy(int map[40][20])
 			{
 				if (map[total[i].y+k][total[i].x+j] > 1)
 				{
-					destroy = i;
-				}
-				else if (map[total[i].y][total[i].x] == 2 || map[total[i].y ][total[i].x + 2] == 2)
-				{
-					destroy = i;
+					if (total[i].hp == 0)
+					{
+						total[i].check = true;
+						MoveDeleteEnemy(2, i, map);
+					}
+					else
+					{
+						total[i].hp--;
+						ShowEnemy(i, map);
+					}
 				}
 			}
 		}
-	}
-
-	if (destroy != -1)
-	{
-		if (total[destroy].hp == 0)
-		{
-			total[destroy].check = true;
-			MoveDeleteEnemy(2, destroy, map);
-		}
-
-		total[destroy].hp--;
-		ShowEnemy(destroy, map);
 	}
 
 

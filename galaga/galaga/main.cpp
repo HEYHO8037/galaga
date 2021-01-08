@@ -1,3 +1,4 @@
+
 #include "import.h"
 
 int main(void)
@@ -73,22 +74,23 @@ int main(void)
 				}
 			}
 
-  			e1->MoveRandEnemy(map1->map);
+			p1->CheckPlayerBullet(map1->map);
+			e1->HitCheckEnemy(map1->map);
+
+			e1->bulletCheck(p1->center, p1->Y, map1->map);
+			p1->bulletCheck(e1->enemycount, e1->total, map1->map);
+
+			e1->bulletDestroy(map1->map);
+			p1->bulletDestroy(map1->map);
+
+			e1->MoveRandEnemy(map1->map);
 			e1->RandBullet(map1->map);
 
 			e1->bulletMove(map1->map);
 			p1->bulletMove(map1->map);
 
-			p1->CheckPlayerBullet(map1->map);
-			e1->bulletCheck(p1->center, p1->Y, map1->map);
-			e1->bulletDestroy(map1->map);
 
-			e1->HitCheckEnemy(map1->map);
-			p1->bulletCheck(e1->enemycount, e1->total, map1->map);
-			p1->bulletDestroy(map1->map);
 
-			
-			
 
 			if (e1->mEnemycount == 0)
 			{
@@ -115,3 +117,4 @@ int main(void)
 		}
 	}
 }
+

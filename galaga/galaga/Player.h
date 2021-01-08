@@ -4,7 +4,7 @@
 
 class Player : Bullet
 {
-protected:
+private:
 	int playerMember[2][3] =
 	{
 		{0,1,0},

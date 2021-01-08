@@ -36,15 +36,8 @@ void Bullet::Destroy(int map[40][20])
 	{
 		if (totBul[i].check == true )
 		{
-			if (totBul[i].destroyed == false)
-			{
-				map[totBul[i].y][totBul[i].x] = 0;
-				totBul[i].destroyed = true;
-			}
-			else if (totBul[i].destroyed == true)
-			{
-				continue;
-			}
+			map[totBul[i].y][totBul[i].x] = 0;
+			totBul[i].destroyed = true;
 		}
 	}
 }
@@ -80,19 +73,14 @@ void Bullet::CheckBullet(int posX, int posY, int map[40][20])
 {
 	for (int i = 0; i < memCount; i++)
 	{
-		for (int k = 0; k < 2; k++)
+		if ((posX + 2 >= totBul[i].x >= posX) &&
+			(posY + 1 >= totBul[i].y >= posY))
 		{
-			for (int j = 0; j < 3; j++)
-			{
-				if (totBul[i].x == posX + j && totBul[i].y == posY + k && map[totBul[i].y][totBul[i].x] > 1)
-				{
-					totBul[i].check = true;
-				}
-				else if (totBul[i].y <= 1 || totBul[i].y >= 38)
-				{
-					totBul[i].check = true;
-				}
-			}
+			totBul[i].check = true;
+		}
+		else if (totBul[i].y <= 1 || totBul[i].y >= 38)
+		{
+			totBul[i].check = true;
 		}
 	}
 }

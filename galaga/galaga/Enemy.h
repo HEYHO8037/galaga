@@ -2,7 +2,7 @@
 #include <random>
 #include "Bullet.h"
 
-static struct EnemyMember
+struct EnemyMember
 {
 	int member[2][3] =
 	{
