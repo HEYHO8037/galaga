@@ -6,15 +6,15 @@ void Map::InitMap()
 	{
 		for (int k = 0; k < 20; k++)
 		{
-			if (i == 0 || i == 39)
+			if (i == 0 || i == 39) // 세로 맵 테두리 생성
 			{
 				map[i][k] = 1;
 			}
-			else if (k == 0 || k == 19)
+			else if (k == 0 || k == 19) // 가로 맵 테두리 생성
 			{
 				map[i][k] = 1;
 			}
-			else
+			else // 빈 칸 생성
 			{
 				map[i][k] = 0;
 			}
@@ -28,11 +28,11 @@ void Map::UpdateMap()
 	{
 		for (int k = 0; k < 20; k++)
 		{
-			if (map[i][k] == 1)
+			if (map[i][k] == 1 || map[i][k] == 2) // 맵 좌표안의 값이 1 또는 2 일 경우
 			{
-				WriteBuffer(k, i, "■");
+				WriteBuffer(k, i, "■"); 
 			}
-			else
+			else // 그 외 해당하는 값이 들어갈 경우
 			{
 				WriteBuffer(k, i, "□");
 			}

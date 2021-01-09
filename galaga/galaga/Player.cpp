@@ -52,12 +52,15 @@ void Player::CheckPlayerBullet(int map[40][20])
 		{
 			if (map[Y + i][center + k] > 1)
 			{
-				check = true;
+				
+				hp--;
+				deleteMovePlayer(map);
+				InitPlayer(map);
 			}
 		}
 	}
 	
-	if (check)
+	if (hp == 0)
 	{
 		dead = true;
 		deleteMovePlayer(map);
@@ -86,14 +89,11 @@ void Player::bulletCheck(int num, EnemyMember *save , int map[40][20])
 {
 	for (int i = 0; i < num; i++)
 	{
-		if (save->check == false)
+		if (save[i].check == false)
 		{
-			CheckBullet(save->x, save->y, map);
+			CheckBullet(save[i].x, save[i].y, map);
 		}
-		save += 1;
 	}
-
-	save -= num;
 }
 
 void Player:: bulletDestroy(int map[40][20])

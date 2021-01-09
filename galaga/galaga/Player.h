@@ -10,7 +10,7 @@ private:
 		{0,1,0},
 		{1,1,1}
 	};
-	bool check = false;
+	int hp = 3;
 public:
 	int center = 10;
 	int Y = 30;

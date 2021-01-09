@@ -34,7 +34,7 @@ void Enemy::ShowAllEnemy(int map[40][20])
 			{
 				for (int j = 0; j < 3; j++)
 				{
-					map[total[i].y + k][total[i].x + j] = total[i].member[k][j];
+					map[total[i].y + k][total[i].x + j] += total[i].member[k][j];
 				}
 			}
 		}
@@ -49,7 +49,7 @@ void Enemy::ShowEnemy(int eneNum, int map[40][20])
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				map[total[eneNum].y + k][total[eneNum].x + j] = total[eneNum].member[k][j];
+				map[total[eneNum].y + k][total[eneNum].x + j] += total[eneNum].member[k][j];
 			}
 		}
 	}
@@ -96,7 +96,7 @@ void Enemy::MoveDeleteEnemy(int num, int eneNum, int map[40][20])
 		}
 		total[eneNum].x--;
 	}
-	if (num == 2 && total[eneNum].check == false)
+	if (num == 2)
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -166,25 +166,24 @@ void Enemy::HitCheckEnemy(int map[40][20])
 
 	for (int i = 0; i < enemycount; i++)
 	{
+		if (total[i].hp == 0)
+		{
+			total[i].check = true;
+			MoveDeleteEnemy(2, i, map);
+		}
 		for (int k = 0; k < 2; k++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
 				if (map[total[i].y+k][total[i].x+j] > 1)
 				{
-					if (total[i].hp == 0)
-					{
-						total[i].check = true;
-						MoveDeleteEnemy(2, i, map);
-					}
-					else
-					{
-						total[i].hp--;
-						ShowEnemy(i, map);
-					}
+					total[i].hp--;
+					MoveDeleteEnemy(2, i, map);
+					ShowEnemy(i, map);
 				}
 			}
 		}
+
 	}
 
 
