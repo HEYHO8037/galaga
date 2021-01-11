@@ -22,7 +22,7 @@ void Map::InitMap()
 	}
 }
 
-void Map::UpdateMap()
+void Map::UpdateMap(int playerhp)
 {
 	for (int i = 0; i < 40; i++)
 	{
@@ -38,20 +38,93 @@ void Map::UpdateMap()
 			}
 		}
 	}
+
+	WriteBuffer(9, 42, "Player HP : ");
+
+	if (playerhp == 1)
+	{
+		WriteBuffer(21, 42, "1");
+	}
+	else if (playerhp == 2)
+	{
+		WriteBuffer(21, 42, "2");
+	}
+	else if (playerhp == 3)
+	{
+		WriteBuffer(21, 42, "3");
+	}
+
+
+	WriteBuffer(1, 45, "방향키 :  움직임");
+	WriteBuffer(1, 46, "SPACE BAR :  발사");
+
 }
+
+void Map::NextStageUI()
+{
+	InitMap();
+
+	for (int i = 0; i < 40; i++)
+	{
+		for (int k = 0; k < 20; k++)
+		{
+			if (map[i][k] == 1 || map[i][k] == 2) // 맵 좌표안의 값이 1 또는 2 일 경우
+			{
+				WriteBuffer(k, i, "■");
+			}
+			else // 그 외 해당하는 값이 들어갈 경우
+			{
+				WriteBuffer(k, i, "□");
+			}
+			WriteBuffer(8, 15, "NEXT STAGE");
+		}
+	}
+
+	for (int i = 1; i <= 6; i++)
+	{
+		WriteBuffer(17 + i, 15, "□");
+	}
+	WriteBuffer(24, 15, "■");
+
+}
+
+void Map::StartMenuUI(int &key, int number)
+{
+	WriteBuffer(12, 5, "GALAGA Ver.0.0.1");
+	WriteBuffer(11, 10, "1. Start Game");
+	WriteBuffer(11, 12, "2. Exit");
+
+	if (number == 0)
+	{
+		WriteBuffer(8, 10, "▶");
+	}
+	else if (number == 1)
+	{
+		WriteBuffer(8, 12, "▶");
+	}
+	
+}
+
+void Map::GameOverUI()
+{
+
+}
+
+
+
 
 
 
 
 void Map::CreateBuffer()
 {
-	COORD size = { 20, 40 };
+	COORD size = { 20, 50 };
 	CONSOLE_CURSOR_INFO cci;
 	SMALL_RECT rect;
 	rect.Bottom = 0;
 	rect.Left = 0;
 	rect.Right = 19;
-	rect.Top = 39;
+	rect.Top = 49;
 
 	hBuffer[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	SetConsoleScreenBufferSize(hBuffer[0], size);

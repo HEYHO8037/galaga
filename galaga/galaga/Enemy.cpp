@@ -66,6 +66,8 @@ void Enemy::MoveDeleteAllEnemy(int map[40][20])
 			{
 				map[total[i].y + k][total[i].x + j] = 0;
 			}
+
+
 		}
 	}
 }
@@ -171,15 +173,18 @@ void Enemy::HitCheckEnemy(int map[40][20])
 			total[i].check = true;
 			MoveDeleteEnemy(2, i, map);
 		}
-		for (int k = 0; k < 2; k++)
+		if (total[i].check == false)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 2; k++)
 			{
-				if (map[total[i].y+k][total[i].x+j] > 1)
+				for (int j = 0; j < 3; j++)
 				{
-					total[i].hp--;
-					MoveDeleteEnemy(2, i, map);
-					ShowEnemy(i, map);
+					if (map[total[i].y + k][total[i].x + j] > 1)
+					{
+						total[i].hp--;
+						MoveDeleteEnemy(2, i, map);
+						ShowEnemy(i, map);
+					}
 				}
 			}
 		}

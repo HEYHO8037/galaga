@@ -10,11 +10,11 @@ private:
 		{0,1,0},
 		{1,1,1}
 	};
-	int hp = 3;
 public:
 	int center = 10;
 	int Y = 30;
 	bool dead = false;
+	int hp = 3;
 
 public:
 	void InitPlayer(int map[40][20]);
