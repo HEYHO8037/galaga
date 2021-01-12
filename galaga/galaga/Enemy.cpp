@@ -162,9 +162,10 @@ void Enemy::MoveRandEnemy(int map[40][20])
 
 
 
-void Enemy::HitCheckEnemy(int map[40][20])
+void Enemy::HitCheckEnemy(int map[40][20], int& score)
 {
 	mEnemycount = 0;
+	score = 0;
 
 	for (int i = 0; i < enemycount; i++)
 	{
@@ -198,6 +199,10 @@ void Enemy::HitCheckEnemy(int map[40][20])
 		if (total[i].check == false)
 		{
 			mEnemycount++;
+		}
+		else if (total[i].check == true)
+		{
+			score += 100;
 		}
 	}
 }

@@ -22,8 +22,10 @@ void Map::InitMap()
 	}
 }
 
-void Map::UpdateMap(int playerhp)
+void Map::UpdateMap(int playerhp, int& score)
 {
+	char buff[256];
+
 	for (int i = 0; i < 40; i++)
 	{
 		for (int k = 0; k < 20; k++)
@@ -38,6 +40,9 @@ void Map::UpdateMap(int playerhp)
 			}
 		}
 	}
+	sprintf_s(buff, "%d", score);
+	WriteBuffer(9, 41, "SCORE : ");
+	WriteBuffer(17, 41, buff);
 
 	WriteBuffer(9, 42, "Player HP : ");
 
@@ -105,8 +110,14 @@ void Map::StartMenuUI(int &key, int number)
 	
 }
 
-void Map::GameOverUI()
+void Map::GameOverUI(int& score)
 {
+	char buff[256];
+	sprintf_s(buff, "%d", score);
+
+	WriteBuffer(12, 5, "GAME OVER");
+	WriteBuffer(12, 15, "TOTAL SCORE : ");
+	WriteBuffer(27, 15, buff);
 
 }
 
@@ -166,7 +177,7 @@ void Map::ClearBuffer()
 {
 	COORD Coor = { 0,0 };
 	DWORD dw;
-	FillConsoleOutputCharacter(hBuffer[nScreenIndex], ' ', 40*20, Coor, &dw);
+	FillConsoleOutputCharacter(hBuffer[nScreenIndex], ' ' , 10000, Coor, &dw);
 }
 
 void Map::DeleteBuffer()

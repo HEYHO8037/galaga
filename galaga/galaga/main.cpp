@@ -80,12 +80,12 @@ void Start(Map* map1, Player* p1, Enemy* e1, bool& start, int& key, int& stage, 
 	}	
 }
 
-void Update(Map* map1, Player* p1, Enemy* e1, int& key)
+void Update(Map* map1, Player* p1, Enemy* e1, int& key, int& score)
 {
 	Sleep(50);
 
 	map1->ClearBuffer();
-	map1->UpdateMap(p1->hp);
+	map1->UpdateMap(p1->hp, score);
 	map1->FlippingBuffer();
 
 	if (_kbhit())
@@ -117,7 +117,7 @@ void Update(Map* map1, Player* p1, Enemy* e1, int& key)
 	e1->bulletCheck(p1->center, p1->Y, map1->map);
 	p1->CheckPlayerBullet(map1->map);
 	p1->bulletCheck(e1->enemycount, e1->total, map1->map);
-	e1->HitCheckEnemy(map1->map);
+	e1->HitCheckEnemy(map1->map, score);
 
 	e1->bulletDestroy(map1->map);
 	p1->bulletDestroy(map1->map);
@@ -129,7 +129,7 @@ void Update(Map* map1, Player* p1, Enemy* e1, int& key)
 	p1->bulletMove(map1->map);
 }
 
-void Checking(Map* map1, Player* p1, Enemy* e1, bool& start, int& stage)
+void Checking(Map* map1, Player* p1, Enemy* e1, bool& start, int& stage, int& score)
 {
 	if (e1->mEnemycount == 0)
 	{
@@ -137,20 +137,31 @@ void Checking(Map* map1, Player* p1, Enemy* e1, bool& start, int& stage)
 		map1->NextStageUI();
 		map1->FlippingBuffer();
 
+		Sleep(1000);
+
 		e1->ReleaseAllEnemy();
 		e1->bulletRelease();
 		p1->bulletRelease();
 
-		map1->NextStageUI();
 
-		Sleep(1000);
+
 
 		map1->DeleteBuffer();
 		start = true;
 		stage++;
 	}
+
 	if ((stage == 3 && e1->mEnemycount == 0) || p1->dead == true)
 	{
+		map1->ClearBuffer();
+		map1->FlippingBuffer();
+
+		map1->ClearBuffer();
+		map1->GameOverUI(score);
+		map1->FlippingBuffer();
+
+		Sleep(1000);
+
 
 		e1->ReleaseAllEnemy();
 		e1->bulletRelease();
@@ -167,10 +178,11 @@ void Checking(Map* map1, Player* p1, Enemy* e1, bool& start, int& stage)
 
 int main(void)
 {
-	system("mode con cols=50 lines=60");
+	system("mode con cols=40 lines=50");
 
 	int arrow = 0;
 	int key = 0;
+	int score = 0;
 	bool start = true;
 	Map* map1 = new Map();
 	Player* p1 = new Player();
@@ -191,8 +203,8 @@ int main(void)
 		}
 		else if (start == false)
 		{
-			Update(map1, p1, e1, key);
-			Checking(map1, p1, e1, start, stage);	
+			Update(map1, p1, e1, key, score);
+			Checking(map1, p1, e1, start, stage, score);	
 		}
 	}
 }
